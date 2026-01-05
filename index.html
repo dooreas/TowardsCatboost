@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>towards_catboost</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7531,7 +7531,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Package-Imports">Package Imports<a class="anchor-link" href="#Package-Imports">¶</a></h3>
+<h4 id="Package-Imports">Package Imports<a class="anchor-link" href="#Package-Imports">¶</a></h4>
 </div>
 </div>
 </div>
@@ -7540,14 +7540,65 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">catboost</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cb</span> 
-<span class="kn">import</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">skl</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">category_encoders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ce</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=941fde2a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Background-Knowledge">Background Knowledge<a class="anchor-link" href="#Background-Knowledge">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af0557f3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Target-Encoders">Target Encoders<a class="anchor-link" href="#Target-Encoders">¶</a></h3><p>Encoding methodologies aim to transform non-numerical categorical feature values into numerical values. There are multiple approaches and each comes with its own advantages and caveats. For instance, to mention a few of them:</p>
+<ul>
+<li><p><strong>Label Encoding</strong>: it simply assigns a unique integer to each category in the data.
+<em>Pros:</em></p>
+<ol>
+<li>Simple</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>May introduce ordinal relationships</li>
+<li>Features with unknown amounts of categories which have high amounts of low-frecquency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
+</ol>
+</li>
+<li><p><strong>One-Hot Encoding</strong>: for each category seen for a feature, it creates a new dummy feature which simply indicates with 0 or 1 when the category appears.
+<em>Pros:</em></p>
+<ol>
+<li>Simple</li>
+<li>Does not assume order between categories</li>
+</ol>
+<p><em>Cons:</em></p>
+<ol>
+<li>Dimensionality may increase considerably making the use of a dimensionality reduction technique necessary and potentially exploding your system's memmory (tip: if you still want to use it check sparse matrices).</li>
+<li>Computationally expensive.</li>
+<li>Features with unknown amounts of categories which have high amounts of low-frecquency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
+</ol>
+</li>
+<li><p><strong>Binary Encoding, Hashing Encodings, ... Let's not get carried out into an endless enumeration.</strong></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
