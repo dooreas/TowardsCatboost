@@ -7520,7 +7520,7 @@ a.anchor-link {
 <h1 id="Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">Doomed to failure: A story about target encoding and Tree-Based Algorithms<a class="anchor-link" href="#Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">¶</a></h1><hr/>
 <p>Have you ever worked with target encoders? Did you ever use any tree-based model? If you have worked with either there will likely be a time in which you are tempted to use both in the same pipeline for classifying data points with categorical features. DON'T! At least until you have read this article detailing one dangerous caveat that this combination has.</p>
 <p>In this article, I will guide you through the caveats that appear when a pipeline combines certain members of the family of target encoders with tree-based models and extremely low or high entropy features. I'll clue you in: data leakeages and overfitting issues will break your pipeline's performance.</p>
-<p>The discussion will be centered around the most basic target encoder and the Leave-One-Out encoder and their interaction with tree-based models under certain conditions. Ultimately, it will lead towards a justification to use CatBoost under these same conditions.</p>
+<p>The discussion will be centered around the most basic target encoder and the leave-one-out encoder and their interaction with tree-based models under certain conditions. Ultimately, it will lead towards a justification to use CatBoost under these same conditions.</p>
 <p>The good news is that these problems that we will see are easy to solve - just use CatBoost and let it handle the encoding methodology for you. As I will be arguing the encoder that it uses by default for categorical features magnificently handles categorical fetures with both extremely low and high entropies and is still in the realm of target encoding.</p>
 <p><strong>Important: to simplify the discussion we will frame the discussion under a binary classification task.</strong></p>
 </div>
@@ -7835,8 +7835,8 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Leave-One-Out-Encoder">Leave-One-Out Encoder<a class="anchor-link" href="#Leave-One-Out-Encoder">¶</a></h4><p>As previously mentioned, there are multiple types of target encoders and sometimes different resources name them differently. However, the last encoder in the previous section is usually the one receiving the name of target encoder. An encoder in this big family that is commonly used is the so-called Leave-One-Out Encoder. The methodology that it uses aims to signal outlier category-to-label instances and reduce their impact in the general target statistic computation. It is frequently used by data scientists. As we will see it comes with several caveats. However, let us see how it works first!</p>
-<p>The Leave-One-Out encoder is actually a vanila target encoder. However, it has a slight modification: it works differently when fitting and transforming the encoder to the training data in comparison when it transforms data from the validation or test sets and new inference data. That is:</p>
+<h4 id="Leave-one-out-Encoder">Leave-one-out Encoder<a class="anchor-link" href="#Leave-one-out-Encoder">¶</a></h4><p>As previously mentioned, there are multiple types of target encoders and sometimes different resources name them differently. However, the last encoder in the previous section is usually the one receiving the name of target encoder. An encoder in this big family that is commonly used is the so-called leave-one-out Encoder. The methodology that it uses aims to signal outlier category-to-label instances and reduce their impact in the general target statistic computation. It is frequently used by data scientists. As we will see it comes with several caveats. However, let us see how it works first!</p>
+<p>The leave-one-out encoder is actually a vanila target encoder. However, it has a slight modification: it works differently when fitting and transforming the encoder to the training data in comparison when it transforms data from the validation or test sets and new inference data. That is:</p>
 <ul>
 <li>When fitting and transforming training data: to compute the encoding of a category c for sample i, we compute the target statistic without accounting for the ith sample</li>
 <li>When transforming data once the encoder has been fitted, the encoder works as the most basic vanila target encoder.</li>
@@ -7867,7 +7867,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>If we look at the resulting transformation performed by the Leave-One-Out encoder on the training set (done with the <strong>fit_transform</strong> method) we see the following:</p>
+<p>If we look at the resulting transformation performed by the leave-one-out encoder on the training set (done with the <strong>fit_transform</strong> method) we see the following:</p>
 </div>
 </div>
 </div>
@@ -8196,6 +8196,27 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ac743925">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Mixing-Tree-based-Models-and-Target-Encoders:-Failure-Scenarios">Mixing Tree-based Models and Target Encoders: Failure Scenarios<a class="anchor-link" href="#Mixing-Tree-based-Models-and-Target-Encoders:-Failure-Scenarios">¶</a></h2><blockquote>
+<p><em>A smooth sea never made a skilled sailor</em></p>
+</blockquote>
+<p>At this point you have read through the definitions of the vanila target encoder and the leave-one-out encoder, and might be tempted to start using it with powerfull tree-based classifiers like Random Forests. ⚠️WATCH OUT!⚠️ As you will see in the following set of scenarios, under certain conditions this combination can be fatal and lead to the massive overfitting of the training dataset.</p>
+<p>These are basically two scenarios:</p>
+<ul>
+<li><p>Scenario 1: Leave-one-out Encoder + feature with a set of unique categories that has low cardinality + Decision Tree -&gt; Data Leak</p>
+</li>
+<li><p>Scenario 2: Tranget Encoder + feature with a large set of unique categories that have low frequency + Decision Tree -&gt; Data Leak</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
