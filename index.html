@@ -7520,6 +7520,7 @@ a.anchor-link {
 <h1 id="Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">Doomed to failure: A story about target encoding and Tree-Based Algorithms<a class="anchor-link" href="#Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">¶</a></h1><hr/>
 <p>Have you ever worked with target encoders? Did you ever use any tree-based model? If you have worked with either there will likely be a time in which you are tempted to use both in the same pipeline for classifying data points with categorical features. DON'T! At least until you have read this article detailing one dangerous caveat that this combination has.</p>
 <p>In this article, I will guide you through the caveats that appear when a pipeline combines certain members of the family of target encoders with tree-based models and extremely low or high entropy features. I'll clue you in: data leakeages and overfitting issues will break your pipeline's performance.</p>
+<p>The discussion will be centered around the most basic target encoder and the Leave-One-Out encoder and their interaction with tree-based models under certain conditions. Ultimately, it will lead towards a justification to use CatBoost under these same conditions.</p>
 <p>The good news is that these problems that we will see are easy to solve - just use CatBoost and let it handle the encoding methodology for you. As I will be arguing the encoder that it uses by default for categorical features magnificently handles categorical fetures with both extremely low and high entropies and is still in the realm of target encoding.</p>
 <p><strong>Important: to simplify the discussion we will frame the discussion under a binary classification task.</strong></p>
 </div>
@@ -7612,7 +7613,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Target-Encoders">Target Encoders<a class="anchor-link" href="#Target-Encoders">¶</a></h3><p>In its most basic form, a target encoder substitutes each category $c$ of a feature with the training set statistic
-$$\frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{all\_samples\_with\_category\_c\_for\_the\_feature}}$$</p>
+$$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{all\_samples\_with\_category\_c\_for\_the\_feature}}$$</p>
 <p>Let us see this basic encoder in action with a basic custom implementation. Firstly, we create a trivial dataset:</p>
 </div>
 </div>
@@ -7819,9 +7820,22 @@ $$\frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{all\_sam
 <p>Nevertheless, note that the encoded value for C has quite a strong meaning taking into account that we have only one instance of it (I know: the other categories are nearly as scarce from the statistical perspective). In other words, C could actually be a lucky sample and in reality C could actually be more associated with zero labels. Good catch! Actually, this first encoder comes with its own caveat: it is easy to overfit based on scarce categories.</p>
 <p>Therefore, many versions arised to distill this knowledge about category frecquency into the encodings. The most common approach is to simply perform a smoothing between the prior prevalence computed over the training set and the target statistic. For instance, the target encoding from the category-encoders library uses the smoothing:
 $$enc(category) = p * stat + (1 - p) * prevalence$$
-where:
+where the prevalence is defined by:
+$$prevalence = \frac{N_{positives}}{N}$$
+and the weighting constant is obtained by:
 $$p = \frac{1}{1 + \exp\big(\frac{(-n\_{value} - k)}{f}\big)}$$
-and $k$ and $f$ are respectively called the minimum samples per leaf and smoothing parameters. To get further information checkout their <a href="https://contrib.scikit-learn.org/category_encoders/targetencoder.html">documentation</a>.</p>
+In the last equation, $k$ and $f$ are respectively called the minimum samples per leaf and smoothing parameters. To get further information checkout their <a href="https://contrib.scikit-learn.org/category_encoders/targetencoder.html">documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=08220f06">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Leave-One-Out-Encoder">Leave-One-Out Encoder<a class="anchor-link" href="#Leave-One-Out-Encoder">¶</a></h4><p>As previously mentioned, there are multiple types of target encoders and sometimes different resources name them differently. However, the last encoder in the previous section is usually the one receiving the name of target encoder. An encoder in this big family that is commonly used is the so-called Leave-One-Out Encoder. The methodology that it uses aims to signal outlier category-to-label instances and reduce their impact in the general target statistic computation. It is frequently used by data scientists. As we will see it comes with several caveats. However, let us see how it works first!</p>
 </div>
 </div>
 </div>
