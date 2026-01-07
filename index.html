@@ -7542,10 +7542,12 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">category_encoders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ce</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">category_encoders</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ce</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
@@ -7623,7 +7625,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dataset_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -7643,7 +7645,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7721,7 +7723,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">dataset_1</span><span class="o">.</span><span class="n">feature_1</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -7740,7 +7742,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7850,7 +7852,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">TargetEncoder</span><span class="p">()</span>
@@ -7876,7 +7878,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">loo_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]],</span> <span class="n">dataset_1</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
@@ -7890,7 +7892,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7961,7 +7963,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">loo_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]])</span>
@@ -7975,7 +7977,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8056,7 +8058,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]],</span> <span class="n">dataset_1</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
@@ -8070,7 +8072,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8130,7 +8132,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]])</span>
@@ -8144,7 +8146,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8236,7 +8238,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dataset_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -8256,7 +8258,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8356,7 +8358,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">loo_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">LeaveOneOutEncoder</span><span class="p">()</span>
@@ -8372,7 +8374,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8460,7 +8462,7 @@ As a matter of fact:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">encoded_dataset_2</span><span class="p">,</span> <span class="n">dataset_2</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
@@ -8528,7 +8530,7 @@ As a matter of fact:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dataset_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -8549,7 +8551,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8650,7 +8652,7 @@ As a matter of fact:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">TargetEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"is_known_worldwide"</span><span class="p">])</span>
@@ -8668,7 +8670,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8751,7 +8753,7 @@ As a matter of fact:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">encoded_data_3</span><span class="p">,</span> <span class="n">dataset_3</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
@@ -8797,7 +8799,286 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">The Solution: The Catboost Classifier and its encoding methodology<a class="anchor-link" href="#The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">¶</a></h2>
+<h2 id="The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">The Solution: The Catboost Classifier and its encoding methodology<a class="anchor-link" href="#The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">¶</a></h2><p>The Catboost classifier is a tree-based model of the family of gradient boosting algorithms which basically iteratively build a tree, compute the loss gradient function and approximate the gradient descent step by adding a tree that fits this loss gradient function to the original tree. These kinds of algorithms are known to be extremely powerfull and even state-of-the-art for tabular datasets.</p>
+<p>However, Catboost has more features that amaze its users, and one of it is its encoding methodology. This methodology is in the family of target encoders, but elegantly solves the issues from the aforementioned failuer scenarios. It works as follows:</p>
+<ol>
+<li><p>First of all, it permutes all samples in the training set before encoding them. In other words, it shuffles the dataset.</p>
+</li>
+<li><p>Next, it encodes the feature's category of row i ysing the target statistic computed over the previous rows.</p>
+</li>
+</ol>
+<p>In addition, each tree fitted by the catboost classifier uses a different encoding using a brand new permutation.</p>
+<p>Why does it solve the aforementioned scenarios? Great question! The answer is clear:</p>
+<ul>
+<li><p>This methodology solves the issue in scenario 1 since now having a category with extremely high frequency and low correlation with the target variables does not leak the information about the label since the permutations and only encoding with previous rows ensure that each time we get different proportions of 1s.</p>
+</li>
+<li><p>Regarding how it handles columns that behave similar to indexes, since the methodology looks at the previous rows, unique categories are encoded by the prevalence.</p>
+</li>
+</ul>
+<p>Let us build a dummy dataset:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9437a732">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">number_of_rows</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">interesting_column</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_rows</span><span class="p">)]</span>
+<span class="n">modified</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="ow">not</span> <span class="n">val</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.15</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">interesting_column</span><span class="p">]</span>
+<span class="n">final_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"city_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_rows</span><span class="p">)],</span>
+        <span class="s2">"is_from_usa"</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span><span class="o">*</span><span class="n">number_of_rows</span><span class="p">,</span>
+        <span class="s2">"right_wing"</span><span class="p">:</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">"yes"</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="s2">"no"</span><span class="p">,</span> <span class="n">interesting_column</span><span class="p">),</span>
+        <span class="s2">"target"</span><span class="p">:</span> <span class="n">modified</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">final_dataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[40]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>city</th>
+<th>is_from_usa</th>
+<th>right_wing</th>
+<th>target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>city_0</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>city_1</td>
+<td>True</td>
+<td>yes</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>city_2</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>city_3</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>city_4</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>5</th>
+<td>city_5</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>6</th>
+<td>city_6</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>7</th>
+<td>city_7</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+<tr>
+<th>8</th>
+<td>city_8</td>
+<td>True</td>
+<td>yes</td>
+<td>0</td>
+</tr>
+<tr>
+<th>9</th>
+<td>city_9</td>
+<td>True</td>
+<td>no</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6b0fbbef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Next, we show how the catboost encoding methodology would work for one iteration i.e. using only one permutation to build one tree. The encoder that uses one permutation can be obtained from the Category Encoders package, and is the one that we will be using next. However, take into consideration that the effects of this methodology would be benefited from the multiple permutations when building different trees in the Catboost ensemble. That is, the integration of the encoding and modelling methodology that happens in the Catboost classifier further improves the response to the aforemntioned kinds of features.</p>
+<p>Hence, here we will only show the effect with the simpler (one permutation) version of the catboost encoder and use a decision tree to fit the encoded data. This would be similar to training Catboost with one iteration.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=794ed859">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">catboost_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">CatBoostEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s2">"city"</span><span class="p">,</span> <span class="s2">"right_wing"</span><span class="p">,</span> <span class="s2">"is_from_usa"</span><span class="p">])</span>
+<span class="n">catboost_encoded_data</span> <span class="o">=</span> <span class="n">catboost_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
+    <span class="n">final_dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"target"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">final_dataset</span><span class="p">[</span><span class="s2">"target"</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">catboost_encoded_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>city</th>
+<th>is_from_usa</th>
+<th>right_wing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.100000</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.100000</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.050000</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.033333</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.025000</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.020000</td>
+</tr>
+<tr>
+<th>6</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.016667</td>
+</tr>
+<tr>
+<th>7</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.014286</td>
+</tr>
+<tr>
+<th>8</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.550000</td>
+</tr>
+<tr>
+<th>9</th>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.012500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
