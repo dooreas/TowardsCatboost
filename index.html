@@ -7623,13 +7623,13 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dataset_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">"feature_1"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">],</span>
-        <span class="s2">"target"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">"feature_1"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">],</span>
+        <span class="s2">"target"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">dataset_1</span>
@@ -7643,7 +7643,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7675,17 +7675,17 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </tr>
 <tr>
 <th>1</th>
-<td>B</td>
+<td>A</td>
 <td>1</td>
 </tr>
 <tr>
 <th>2</th>
 <td>A</td>
-<td>1</td>
+<td>0</td>
 </tr>
 <tr>
 <th>3</th>
-<td>C</td>
+<td>B</td>
 <td>1</td>
 </tr>
 <tr>
@@ -7695,8 +7695,8 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </tr>
 <tr>
 <th>5</th>
-<td>A</td>
-<td>0</td>
+<td>C</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -7721,7 +7721,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">dataset_1</span><span class="o">.</span><span class="n">feature_1</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -7740,7 +7740,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7774,21 +7774,21 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </tr>
 <tr>
 <th>1</th>
-<td>B</td>
-<td>1</td>
-<td>0.500000</td>
-</tr>
-<tr>
-<th>2</th>
 <td>A</td>
 <td>1</td>
 <td>0.333333</td>
 </tr>
 <tr>
+<th>2</th>
+<td>A</td>
+<td>0</td>
+<td>0.333333</td>
+</tr>
+<tr>
 <th>3</th>
-<td>C</td>
+<td>B</td>
 <td>1</td>
-<td>1.000000</td>
+<td>0.500000</td>
 </tr>
 <tr>
 <th>4</th>
@@ -7798,9 +7798,9 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </tr>
 <tr>
 <th>5</th>
-<td>A</td>
-<td>0</td>
-<td>0.333333</td>
+<td>C</td>
+<td>1</td>
+<td>1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -7836,6 +7836,366 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Leave-One-Out-Encoder">Leave-One-Out Encoder<a class="anchor-link" href="#Leave-One-Out-Encoder">¶</a></h4><p>As previously mentioned, there are multiple types of target encoders and sometimes different resources name them differently. However, the last encoder in the previous section is usually the one receiving the name of target encoder. An encoder in this big family that is commonly used is the so-called Leave-One-Out Encoder. The methodology that it uses aims to signal outlier category-to-label instances and reduce their impact in the general target statistic computation. It is frequently used by data scientists. As we will see it comes with several caveats. However, let us see how it works first!</p>
+<p>The Leave-One-Out encoder is actually a vanila target encoder. However, it has a slight modification: it works differently when fitting and transforming the encoder to the training data in comparison when it transforms data from the validation or test sets and new inference data. That is:</p>
+<ul>
+<li>When fitting and transforming training data: to compute the encoding of a category c for sample i, we compute the target statistic without accounting for the ith sample</li>
+<li>When transforming data once the encoder has been fitted, the encoder works as the most basic vanila target encoder.</li>
+</ul>
+<p>The goal of this approach is to ensure that the classifier can learn about categories during training without the encodings being too influenced by outliers. Up next, we show how it works for our dummy dataset while simultaneously comparing it with the target encoder.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=81a597bb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">TargetEncoder</span><span class="p">()</span>
+<span class="n">loo_encoder</span> <span class="o">=</span> <span class="n">ce</span><span class="o">.</span><span class="n">LeaveOneOutEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=15d6bd33">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If we look at the resulting transformation performed by the Leave-One-Out encoder on the training set (done with the <strong>fit_transform</strong> method) we see the following:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d6f08e74">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">loo_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]],</span> <span class="n">dataset_1</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>feature_1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.5</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.5</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>1.0</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=96d67149">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>whereas transformation that it does for any dataset that are passed once it is fitted (only calling the <strong>transform</strong> method) are different since the leaving-one-out methodology is no longer applied:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cb0f9263">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">loo_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>feature_1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.333333</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.333333</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.333333</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.500000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ecb12c60">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note the following three things:</p>
+<ol>
+<li><p>Category C only appears once, and consequently we do not want its encoding to be highly influential during training. The leaving-one-out methodology achieves this by simply substituting C with the prevalence of the training data since by leaving it out, we do not have any sample to compute the target statistic and consequenly default to the prevalence: 0.5.</p>
+</li>
+<li><p>The outlier sample in terms of the category-to-target relationship for category A was encoded differently during training i.e. it was replaced by 0 instead of 0.5.</p>
+</li>
+<li><p>Indeed the encoder transforms categories differently once it has been fitted (actually, if you think about it: it is impossible to run the leaving-one-out methodology on inference data since you do not the label).</p>
+</li>
+</ol>
+<p>You may also notice another fact: feature_1 kind of sucks in order to predict target labels from it. It's okay, we only want to use this dummy dataset to show the inner workings of these encoders.</p>
+<p>To demonstrate the third point, we can see that the target encoder indeed always performs the same encoding:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b0c8d0c4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]],</span> <span class="n">dataset_1</span><span class="p">[</span><span class="s2">"target"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>feature_1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.565054</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3f48d7ad">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">target_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dataset_1</span><span class="p">[[</span><span class="s2">"feature_1"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>feature_1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.474256</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.500000</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.565054</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
