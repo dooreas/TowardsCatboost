@@ -7519,9 +7519,9 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">Doomed to failure: A story about target encoding and Tree-Based Algorithms<a class="anchor-link" href="#Doomed-to-failure:-A-story-about-target-encoding-and-Tree-Based-Algorithms">¶</a></h1><hr/>
 <p>Have you ever worked with target encoders? Did you ever use any tree-based model? If you have worked with either there will likely be a time in which you are tempted to use both in the same pipeline for classifying data points with categorical features. DON'T! At least until you have read this article detailing one dangerous caveat that this combination has.</p>
-<p>In this article, I will guide you through the caveats that appear when a pipeline combines certain members of the family of target encoders with tree-based models and extremely low or high entropy features. I'll clue you in: data leakeages and overfitting issues will break your pipeline's performance.</p>
+<p>In this article, I will guide you through the caveats that appear when a pipeline combines certain members of the family of target encoders with tree-based models and  features that are nearly constant or are somehow similar to indexes. I'll clue you in: data leak issues will break your pipeline's performance.</p>
 <p>The discussion will be centered around the most basic target encoder and the leave-one-out encoder and their interaction with tree-based models under certain conditions. Ultimately, it will lead towards a justification to use CatBoost under these same conditions.</p>
-<p>The good news is that these problems that we will see are easy to solve - just use CatBoost and let it handle the encoding methodology for you. As I will be arguing the encoder that it uses by default for categorical features magnificently handles categorical fetures with both extremely low and high entropies and is still in the realm of target encoding.</p>
+<p>The good news is that these problems that we will see are easy to solve - just use CatBoost and let it handle the encoding methodology for you. As I will be arguing the encoder that it uses by default for categorical features magnificently handles categorical features with both extremely low and high entropies and is still in the realm of target encoding.</p>
 <p><strong>Important: to simplify the discussion we will frame the discussion under a binary classification task.</strong></p>
 <h3 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">¶</a></h3><ol>
 <li><p>Background</p>
@@ -7533,7 +7533,7 @@ a.anchor-link {
 </li>
 <li><p>Mixing Tree-based Models and Target Encoders: Failure Scenarios</p>
 <ul>
-<li>Scenario 1: Leave-one-out Encoder + feature with a highly frecquent category that is uncorrelated to the target variable + Decision Tree -&gt; Data Leak</li>
+<li>Scenario 1: Leave-one-out Encoder + feature with a highly frequent category that is uncorrelated to the target variable + Decision Tree -&gt; Data Leak</li>
 <li>Scenario 2: Target Encoder + feature with a large set of unique categories that have low frequency + Decision Tree -&gt; Data Leak</li>
 </ul>
 </li>
@@ -7603,7 +7603,7 @@ a.anchor-link {
 <p><em>Cons:</em></p>
 <ol>
 <li>May introduce ordinal relationships</li>
-<li>Features with unknown amounts of categories which have high amounts of low-frecquency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
+<li>Features with unknown amounts of categories which have high amounts of low-frequency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
 </ol>
 </li>
 <li><p><strong>One-Hot Encoding</strong>: for each category seen for a feature, it creates a new dummy feature which simply indicates with 0 or 1 when the category appears.
@@ -7614,15 +7614,15 @@ a.anchor-link {
 </ol>
 <p><em>Cons:</em></p>
 <ol>
-<li>Dimensionality may increase considerably making the use of a dimensionality reduction technique necessary and potentially exploding your system's memmory (tip: if you still want to use it check sparse matrices).</li>
+<li>Dimensionality may increase considerably making the use of a dimensionality reduction technique necessary and potentially exploding your system's memory (tip: if you still want to use it check sparse matrices).</li>
 <li>Computationally expensive.</li>
-<li>Features with unknown amounts of categories which have high amounts of low-frecquency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
+<li>Features with unknown amounts of categories which have high amounts of low-frequency categories may be clustered into a marginal category, loosing predictive power based on them.</li>
 </ol>
 </li>
 <li><p><strong>Binary Encoding, Hashing Encodings and more. Let's not get carried out into an endless enumeration.</strong></p>
 </li>
 </ul>
-<p>Importantly, encoding methodologies and classifier interact in different ways and consequently the resulting pipelines may inherit or develop different properties and caveats.</p>
+<p>Importantly, encoding methodologies and classifiers interact in different ways and consequently the resulting pipelines may inherit or develop different properties and caveats.</p>
 </div>
 </div>
 </div>
@@ -7839,7 +7839,7 @@ $$stat = \frac{N_{positive\_samples\_with\_category\_c\_for\_the\_feature}}{N_{a
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>The resulting encoded feature is the only one used by ML algorithms. The idea is that we can actually encode features by their tendency to be associated with the positive class. This way an algorithm learns on top of the tendencies seen for all features, "weights" them and is able to generalize on nobel data points</p>
 <p>Nevertheless, note that the encoded value for C has quite a strong meaning taking into account that we have only one instance of it (I know: the other categories are nearly as scarce from the statistical perspective). In other words, C could actually be a lucky sample and in reality C could actually be more associated with zero labels. Good catch! Actually, this first encoder comes with its own caveat: it is easy to overfit based on scarce categories.</p>
-<p>Therefore, many versions arised to distill this knowledge about category frecquency into the encodings. The most common approach is to simply perform a smoothing between the prior prevalence computed over the training set and the target statistic. For instance, the target encoding from the category-encoders library uses the smoothing:
+<p>Therefore, many versions arose to distill this knowledge about category frequency into the encodings. The most common approach is to simply perform a smoothing between the prior prevalence computed over the training set and the target statistic. For instance, the target encoding from the category-encoders library uses the smoothing:
 $$enc(category) = p * stat + (1 - p) * prevalence$$
 where the prevalence is defined by:
 $$prevalence = \frac{N_{positives}}{N}$$
@@ -7857,10 +7857,10 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Leave-one-out-Encoder">Leave-one-out Encoder<a class="anchor-link" href="#Leave-one-out-Encoder">¶</a></h4><p>As previously mentioned, there are multiple types of target encoders and sometimes different resources name them differently. However, the last encoder in the previous section is usually the one receiving the name of target encoder. An encoder in this big family that is commonly used is the so-called leave-one-out Encoder. The methodology that it uses aims to signal outlier category-to-label instances and reduce their impact in the general target statistic computation. It is frequently used by data scientists. As we will see it comes with several caveats. However, let us see how it works first!</p>
-<p>The leave-one-out encoder is actually a vanila target encoder. However, it has a slight modification: it works differently when fitting and transforming the encoder to the training data in comparison when it transforms data from the validation or test sets and new inference data. That is:</p>
+<p>The leave-one-out encoder is actually a vanilla target encoder. However, it has a slight modification: it works differently when fitting and transforming the encoder to the training data in comparison when it transforms data from the validation or test sets and new inference data. That is:</p>
 <ul>
 <li>When fitting and transforming training data: to compute the encoding of a category c for sample i, we compute the target statistic without accounting for the ith sample</li>
-<li>When transforming data once the encoder has been fitted, the encoder works as the most basic vanila target encoder.</li>
+<li>When transforming data once the encoder has been fitted, the encoder works as the most basic vanilla target encoder.</li>
 </ul>
 <p>The goal of this approach is to ensure that the classifier can learn about categories during training without the encodings being too influenced by outliers. Up next, we show how it works for our dummy dataset while simultaneously comparing it with the target encoder.</p>
 </div>
@@ -8060,7 +8060,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Note the following three things:</p>
 <ol>
-<li><p>Category C only appears once, and consequently we do not want its encoding to be highly influential during training. The leaving-one-out methodology achieves this by simply substituting C with the prevalence of the training data since by leaving it out, we do not have any sample to compute the target statistic and consequenly default to the prevalence: 0.5.</p>
+<li><p>Category C only appears once, and consequently we do not want its encoding to be highly influential during training. The leaving-one-out methodology achieves this by simply substituting C with the prevalence of the training data since by leaving it out, we do not have any sample to compute the target statistic and consequently default to the prevalence: 0.5.</p>
 </li>
 <li><p>The outlier sample in terms of the category-to-target relationship for category A was encoded differently during training i.e. it was replaced by 0 instead of 0.5.</p>
 </li>
@@ -8230,10 +8230,10 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 <h2 id="Mixing-Tree-based-Models-and-Target-Encoders:-Failure-Scenarios">Mixing Tree-based Models and Target Encoders: Failure Scenarios<a class="anchor-link" href="#Mixing-Tree-based-Models-and-Target-Encoders:-Failure-Scenarios">¶</a></h2><blockquote>
 <p><em>A smooth sea never made a skilled sailor</em></p>
 </blockquote>
-<p>At this point you have read through the definitions of the vanila target encoder and the leave-one-out encoder, and might be tempted to start using it with powerfull tree-based classifiers like Random Forests. ⚠️WATCH OUT!⚠️ As you will see in the following set of scenarios, under certain conditions this combination can be fatal and lead to the massive overfitting of the training dataset.</p>
+<p>At this point you have read through the definitions of the vanilla target encoder and the leave-one-out encoder, and might be tempted to start using it with powerful tree-based classifiers like Random Forests. ⚠️WATCH OUT!⚠️ As you will see in the following set of scenarios, under certain conditions this combination can be fatal and lead to the massive overfitting of the training dataset.</p>
 <p>These are basically two scenarios:</p>
 <ul>
-<li><p>Scenario 1: Leave-one-out Encoder + feature with a highly frecquent category that is uncorrelated to the target variable + Decision Tree -&gt; Data Leak</p>
+<li><p>Scenario 1: Leave-one-out Encoder + feature with a highly frequent category that is uncorrelated to the target variable + Decision Tree -&gt; Data Leak</p>
 </li>
 <li><p>Scenario 2: Target Encoder + feature with a large set of unique categories that have low frequency + Decision Tree -&gt; Data Leak</p>
 </li>
@@ -8366,7 +8366,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>It is clear that this feature has a category $a$ which not only is uncorrelated but also is highly frecquent. The problem that appears from having this kind of features when using the leave-one-out encoder and a tree-based model appears when during training, the leave-one-out methodology leaks information about the target variable into the encodings of the feature.</p>
+<p>It is clear that this feature has a category $a$ which not only is uncorrelated but also is highly frequent. The problem that appears from having this kind of features when using the leave-one-out encoder and a tree-based model appears when during training, the leave-one-out methodology leaks information about the target variable into the encodings of the feature.</p>
 <p>We can illustrate why this happens with the above dataset. The reason is that if we have n samples with category a and out of these there are m samples that have a target of 1, then if we are encoding the category of a sample with target 1, then we get the statistic: $$\frac{m-1}{n-1}$$ whereas if the sample is associated with label 0 then we get the statistic: $$\frac{m}{n-1}$$</p>
 <p>Therefore, the encoding itself is somehow copying all the information about the target variable needed to correctly predict on all samples from the training set. As a mater of fact, we can see that this happens for our dataset:</p>
 </div>
@@ -8471,7 +8471,7 @@ In the last equation, $k$ and $f$ are respectively called the minimum samples pe
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>It is no mistery that a simple decision tree can the perfectly fit the training dataset since it is able to build a hyperplane separating both encodings.
+<p>It is no mystery that a simple decision tree can the perfectly fit the training dataset since it is able to build a hyperplane separating both encodings.
 As a matter of fact:</p>
 </div>
 </div>
@@ -8516,8 +8516,8 @@ As a matter of fact:</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>which shows a perfect fit on the training set even though we know that since the feature and the target are independent this tree would then yield poor results for newly sampled data points. Note that this is a perfect fit since the gini impurity of all leaf nodes is 0.</p>
-<p>Why not just drop the feature and use others in the data set? I mean: Shouldn't this feature be dropped on the EDA part of the project? Well the answer is that this example is exagerating the presence of the category and consequently its impact. Nevertheless, this impact still happens for milder instances of this same scenario. For instance, if we have that a feature has for 80% of the training data the same categorical value which is uninformative about the target variable, then this phenomenon will happen but only affect this 80% of the dataset. However, if it turns out that for the rest of the dataset the same happens for another feature, then we are doomed to failure as well.</p>
-<p>Notice that this would not happen for other encoders. Nevertheless all projects are unique and their particularities may also yield other encoders useless. Hence, it is good to know that we can still use this kind of encoders (we will show it in the future). Additionally, even though it is highly not recommended you might not have information about all the possible features that you can have in the training data but you may still want to use as much information as you can while delegating the triage of useless and usefull features to your encoder + classifier pipeline. Again, although this can happen I would not recommend it since you may incur in unexpected errors.</p>
+<p>Why not just drop the feature and use others in the data set? I mean: Shouldn't this feature be dropped on the EDA part of the project? Well the answer is that this example is exaggerating the presence of the category and consequently its impact. Nevertheless, this impact still happens for milder instances of this same scenario. For instance, if we have that a feature has for 80% of the training data the same categorical value which is uninformative about the target variable, then this phenomenon will happen but only affect this 80% of the dataset. However, if it turns out that for the rest of the dataset the same happens for another feature, then we are doomed to failure as well.</p>
+<p>Notice that this would not happen for other encoders. Nevertheless all projects are unique and their particularities may also yield other encoders useless. Hence, it is good to know that we can still use this kind of encoders (we will show it in the future). Additionally, even though it is highly not recommended you might not have information about all the possible features that you can have in the training data but you may still want to use as much information as you can while delegating the triage of useless and useful features to your encoder + classifier pipeline. Again, although this can happen I would not recommend it since you may incur in unexpected errors.</p>
 </div>
 </div>
 </div>
@@ -8539,7 +8539,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The dataset that we will use to showcase this failure scenario contains a feature <em>name</em> that has a large set (with respect to the total size of the training dataset) of unique categories with low frequency. As a matter of fact, this feature does not give any information about the true target value of samples since it has a role similar to that of an indexer. Hence, we should not be able to predict based on it. Additionally, we have created a truly meaningfull feature <em>is_known_worldwide</em> which would allows us to learn a model capable of generalizing.</p>
+<p>The dataset that we will use to showcase this failure scenario contains a feature <em>name</em> that has a large set (with respect to the total size of the training dataset) of unique categories with low frequency. As a matter of fact, this feature does not give any information about the true target value of samples since it has a role similar to that of an indexer. Hence, we should not be able to predict based on it. Additionally, we have created a truly meaningful feature <em>is_known_worldwide</em> which would allows us to learn a model capable of generalizing.</p>
 <p>Let us have a look at this dataset (as you can see when I was working on this topic the presidential elections in the USA were running):</p>
 </div>
 </div>
@@ -8763,7 +8763,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Again, it is no mistery that a decision tree can make a perfect fit of this dataset while only looking at the unmeaningfull feature: <em>name</em>. Have a look:</p>
+<p>Again, it is no mystery that a decision tree can make a perfect fit of this dataset while only looking at the unmeaning feature: <em>name</em>. Have a look:</p>
 </div>
 </div>
 </div>
@@ -8807,7 +8807,7 @@ As a matter of fact:</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Note once more that this is a perfect fit since the gini impurity of all leaf nodes is 0.</p>
-<p>Again, you could be asking why is this feature not dropped in the EDA part of the project after realizing it works as an indexer. However, you would be getting the same answer as beforehand: this example is exagerated, but this phenomenon can happen even if this column just works as an indexer for a part of the dataset while the rest has meaningfull information. Additionally, most of the arguments given for the same question in scenario 1 still apply for this scenario.</p>
+<p>Again, you could be asking why is this feature not dropped in the EDA part of the project after realizing it works as an indexer. However, you would be getting the same answer as beforehand: this example is exaggerated, but this phenomenon can happen even if this column just works as an indexer for a part of the dataset while the rest has meaningful information. Additionally, most of the arguments given for the same question in scenario 1 still apply for this scenario.</p>
 </div>
 </div>
 </div>
@@ -8818,18 +8818,18 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">The Solution: The Catboost Classifier and its encoding methodology<a class="anchor-link" href="#The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">¶</a></h2><p>The Catboost classifier is a tree-based model of the family of gradient boosting algorithms which basically iteratively build a tree, compute the loss gradient function and approximate the gradient descent step by adding a tree that fits this loss gradient function to the original tree. These kinds of algorithms are known to be extremely powerfull and even state-of-the-art for tabular datasets.</p>
-<p>However, Catboost has more features that amaze its users, and one of it is its encoding methodology. This methodology is in the family of target encoders, but elegantly solves the issues from the aforementioned failuer scenarios. It works as follows:</p>
+<h2 id="The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">The Solution: The Catboost Classifier and its encoding methodology<a class="anchor-link" href="#The-Solution:-The-Catboost-Classifier-and-its-encoding-methodology">¶</a></h2><p>The Catboost classifier is a tree-based model of the family of gradient boosting algorithms which basically iteratively build a tree, compute the loss gradient function and approximate the gradient descent step by adding a tree that fits this loss gradient function to the original tree. These kinds of algorithms are known to be extremely powerful and even state-of-the-art for tabular datasets.</p>
+<p>However, Catboost has more features that amaze its users, and one of it is its encoding methodology. This methodology is in the family of target encoders, but elegantly solves the issues from the aforementioned failure scenarios. It works as follows:</p>
 <ol>
 <li><p>First of all, it permutes all samples in the training set before encoding them. In other words, it shuffles the dataset.</p>
 </li>
-<li><p>Next, it encodes the feature's category of row i ysing the target statistic computed over the previous rows.</p>
+<li><p>Next, it encodes the feature's category of row i using the target statistic computed over the previous rows.</p>
 </li>
 </ol>
-<p>In addition, each tree fitted by the catboost classifier uses a different encoding using a brand new permutation.</p>
+<p>In addition, each tree fitted by the Catboost classifier uses a different encoding using a brand new permutation.</p>
 <p>Why does it solve the aforementioned scenarios? Great question! The answer is clear:</p>
 <ul>
-<li><p>This methodology solves the issue in scenario 1 since now having a category with extremely high frequency and low correlation with the target variables does not leak the information about the label since the permutations and only encoding with previous rows ensure that each time we get different proportions of 1s.</p>
+<li><p>This methodology solves the issue in scenario 1 since now having a category with extremely high frequency and low correlation with the target variables does not leak the information about the label since the permutations and only encoding with previous rows ensures that each time we get different proportions of 1s.</p>
 </li>
 <li><p>Regarding how it handles columns that behave similar to indexes, since the methodology looks at the previous rows, unique categories are encoded by the prevalence.</p>
 </li>
@@ -8989,8 +8989,8 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Next, we show how the catboost encoding methodology would work for one iteration i.e. using only one permutation to build one tree. The encoder that uses one permutation can be obtained from the Category Encoders package, and is the one that we will be using next. However, take into consideration that the effects of this methodology would be benefited from the multiple permutations when building different trees in the Catboost ensemble. That is, the integration of the encoding and modelling methodology that happens in the Catboost classifier further improves the response to the aforemntioned kinds of features.</p>
-<p>Hence, here we will only show the effect with the simpler (one permutation) version of the catboost encoder and use a decision tree to fit the encoded data. This would be similar to training Catboost with one iteration.</p>
+<p>Next, we show how the Catboost encoding methodology would work for one iteration i.e. using only one permutation to build one tree. The encoder that uses one permutation can be obtained from the Category Encoders package, and is the one that we will be using next. However, take into consideration that the effects of this methodology would be benefited from the multiple permutations when building different trees in the Catboost ensemble. That is, the integration of the encoding and modelling methodology that happens in the Catboost classifier further improves the response to the aforementioned kinds of features.</p>
+<p>Hence, here we will only show the effect with the simpler (one permutation) version of the Catboost encoder and use a decision tree to fit the encoded data. This would be similar to training Catboost with one iteration.</p>
 </div>
 </div>
 </div>
@@ -9118,7 +9118,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As we see this methodology has consequently succeded in both failure scenarios since now the two troublesome features have been appropiately encoded with the meaning that they provide: none. On the other hand, the meaningfull feature <em>right_wing</em> is encoded differently in what at first seems to be valuable for predicting the target variable.</p>
+<p>As we see this methodology has consequently succeeded in both failure scenarios since now the two troublesome features have been appropriately encoded with the meaning that they provide: none. On the other hand, the meaningful feature <em>right_wing</em> is encoded differently in what at first seems to be valuable for predicting the target variable.</p>
 <p>Lets check whether a tree will be able to overfit on the training data now:</p>
 </div>
 </div>
@@ -9162,7 +9162,7 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Therefore, we have proved how this methodology is able to overcome the issues seen in the previous scenarios. That is, the catboost classifier now ignores constant or nearly constant uncorrelated features as well as those which behave similar to an index. In turn, the associated classifier can now focus on the important features for our target variable.</p>
+<p>Therefore, we have proved how this methodology is able to overcome the issues seen in the previous scenarios. That is, the Catboost classifier now ignores constant or nearly constant uncorrelated features as well as those which behave similar to an index. In turn, the associated classifier can now focus on the important features for our target variable.</p>
 </div>
 </div>
 </div>
@@ -9173,9 +9173,9 @@ As a matter of fact:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>If you want to use an encoder from the family of target encoders and a tree-base model, why don't you use directly Catboost?</p>
-<p>Hope that you have enjoyed this article as much as I did when finding out about this issues!
-Thanks for reading this far! Congrats!! Checkout my webpage for more articles on Machine Learning, AI, Cryptography or Mathematics.</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>If you want to use an encoder from the family of target encoders and a tree-base model, why don't you use directly Catboost?
+Hope that you have enjoyed this article as much as I did when finding out about this issues!</p>
+<p>Thanks for reading this far! Congrats!! Checkout my webpage for more articles on Machine Learning, AI, Cryptography or Mathematics.</p>
 </div>
 </div>
 </div>
